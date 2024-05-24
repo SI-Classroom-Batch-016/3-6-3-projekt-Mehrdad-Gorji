@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#14000000"
+    android:layout_margin="2dp"
+
+
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:cardCornerRadius="15dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+
+            <ImageView
+                android:id="@+id/delet_Icon_Warenkorb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-5dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/baseline_delete_forever_24"
+                app:layout_constraintBottom_toBottomOf="@+id/product_Name_Warenkorb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/product_Name_Warenkorb"
+                app:layout_constraintTop_toTopOf="@+id/product_Name_Warenkorb"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/total_Preis_Warenkorb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="20.00 €"
+                android:textColor="#006D05"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/product_Preis_Warenkorb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/product_Preis_Warenkorb"
+                app:layout_constraintTop_toTopOf="@+id/product_Preis_Warenkorb" />
+
+            <ImageView
+                android:id="@+id/minus_Icon_Warenkorb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                app:layout_constraintBottom_toBottomOf="@+id/product_Preis_Warenkorb"
+                app:layout_constraintStart_toEndOf="@+id/product_Preis_Warenkorb"
+                app:layout_constraintTop_toTopOf="@+id/product_Preis_Warenkorb"
+                app:srcCompat="@drawable/baseline_remove_circle_outline_24" />
+
+            <TextView
+                android:id="@+id/quantityZahlWarenkorb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/minus_Icon_Warenkorb"
+                app:layout_constraintStart_toEndOf="@+id/minus_Icon_Warenkorb"
+                app:layout_constraintTop_toTopOf="@+id/minus_Icon_Warenkorb" />
+
+            <TextView
+                android:id="@+id/product_Preis_Warenkorb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="10.00 €"
+                android:textColor="#FF5722"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/product_Image_Warenkorb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/product_Description_Warenkorb"
+                app:layout_constraintTop_toBottomOf="@+id/product_Description_Warenkorb" />
+
+            <TextView
+                android:id="@+id/product_Name_Warenkorb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Margarita"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/product_Image_Warenkorb"
+                app:layout_constraintStart_toEndOf="@+id/product_Image_Warenkorb"
+                app:layout_constraintTop_toTopOf="@+id/product_Image_Warenkorb"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/plus_Icon_Warenkorb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+
+                android:src="@drawable/baseline_add_circle_outline_24"
+                app:layout_constraintBottom_toBottomOf="@+id/quantityZahlWarenkorb"
+                app:layout_constraintEnd_toStartOf="@+id/total_Preis_Warenkorb"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/quantityZahlWarenkorb"
+                app:layout_constraintTop_toTopOf="@+id/quantityZahlWarenkorb"
+                app:layout_constraintVertical_bias="0.666" />
+
+            <ImageView
+                android:id="@+id/product_Image_Warenkorb"
+                android:layout_width="67dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/buffalo_chicken" />
+
+            <TextView
+                android:id="@+id/product_Description_Warenkorb"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="dfdfdfdf  dfd fd fd fd fd f df df d fd"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/product_Name_Warenkorb"
+                app:layout_constraintTop_toBottomOf="@+id/product_Name_Warenkorb"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

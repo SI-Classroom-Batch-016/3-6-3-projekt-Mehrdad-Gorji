@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/product_name_cart"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Ui.ProductPage"
+    android:background="#FEF7FF">
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="-20dp"
+        android:layout_marginEnd="-20dp"
+        android:src="@drawable/geradint_01"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/productImageCart"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/buffalo_chicken"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon_category_car" />
+
+    <TextView
+        android:id="@+id/product_name_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:text="Margarita"
+        android:textColor="#1B1B1B"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/productImageCart"
+        app:layout_constraintStart_toStartOf="@+id/productImageCart"
+        app:layout_constraintTop_toBottomOf="@+id/productImageCart" />
+
+    <TextView
+        android:id="@+id/Description_Page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:text="classic_pizza_with_tomatoes_and_mozzarella_classic_pizza_with_tomatoes_and_mozzarella_classic_pizza_with_tomatoes_and_mozzarella_classic_pizza_with_tomatoes_and_mozzarella"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/product_name_page"
+        app:layout_constraintStart_toStartOf="@+id/product_name_page"
+        app:layout_constraintTop_toBottomOf="@+id/product_name_page" />
+
+    <TextView
+        android:id="@+id/product_preis_Page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="70dp"
+
+        android:gravity="center"
+        android:text="20.55 €"
+        android:textColor="#FFEB3B"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/Description_Page"
+        app:layout_constraintStart_toStartOf="@+id/Description_Page"
+        app:layout_constraintTop_toBottomOf="@+id/Description_Page" />
+
+    <Button
+        android:id="@+id/Add_To_Cart_page"
+        style="@style/CardView.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="60dp"
+        android:backgroundTint="#FF5722"
+        android:gravity="center"
+        android:text="Add To Cart"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/product_preis_Page"
+        app:layout_constraintStart_toStartOf="@+id/product_preis_Page"
+        app:layout_constraintTop_toBottomOf="@+id/product_preis_Page" />
+
+    <ImageView
+        android:id="@+id/forward_page"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/baseline_arrow_forward_ios_24"
+        app:layout_constraintBottom_toBottomOf="@+id/productImageCart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/productImageCart"
+        app:layout_constraintTop_toTopOf="@+id/productImageCart" />
+
+    <ImageView
+        android:id="@+id/back_page"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="@+id/productImageCart"
+        app:layout_constraintEnd_toStartOf="@+id/productImageCart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/productImageCart" />
+
+    <ImageView
+        android:id="@+id/Cart_Detail"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/baseline_shopping_cart_24"
+        app:layout_constraintBottom_toTopOf="@+id/productImageCart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/Warenkorb_Stuk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="22"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Cart_Detail"
+        app:layout_constraintEnd_toEndOf="@+id/Cart_Detail"
+        app:layout_constraintStart_toStartOf="@+id/Cart_Detail" />
+
+    <TextView
+        android:id="@+id/icon_category_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Category"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/productImageCart"
+        app:layout_constraintStart_toStartOf="@+id/productImageCart"
+        app:layout_constraintTop_toTopOf="@+id/imageView9" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="Splash_Background">#FE724C</color>
+    <color name="hintTextColor">#FF3D00</color>
+    <color name="helperTextColor">#FF9800</color>
+    <color name="placeholderTextColor">#3F51B5</color>
+    <color name="prefixTextColor">#E91E63</color>
+    <color name="suffixTextColor">#009688</color>
+    <color name="startIconTint">#673AB7</color>
+    <color name="endIconTint">#E91E63</color>
+    <color name="boxStrokeColor">#2D2D2D</color>
+
+
+    <!-- استایل عمومی TextInputLayout -->
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+
+      <item name="android:padding">0dp</item>
+      <item name="boxBackgroundMode">outline</item>
+
+
+
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxStrokeColor">#FFFFFF</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="helperTextTextColor">@color/white</item>
+        <item name="placeholderTextColor">@color/white</item>
+        <item name="prefixTextColor">@color/white</item>
+        <item name="suffixTextColor">@color/white</item>
+        <item name="startIconTint">@color/white</item>
+        <item name="endIconTint">@color/white</item>
+        <item name="boxStrokeWidthFocused">4dp</item>
+        <item name="hintTextAppearance">@style/HintTextStyle</item>
+  </style>
+
+  <!-- استایل متن پیشنهادی -->
+    <style name="HintTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/hintTextColor</item>
+    </style>
+
+
+
+</resources>
