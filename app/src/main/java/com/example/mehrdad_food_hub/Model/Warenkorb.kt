@@ -8,4 +8,4 @@ data class Warenkorb(
     val productImage: Int,
     var productQuantity: Int,
 
-)
+    )

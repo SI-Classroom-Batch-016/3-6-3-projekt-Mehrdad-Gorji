@@ -14,8 +14,12 @@ import com.example.mehrdad_food_hub.databinding.FragmentSplashBinding
 
 class Splash : Fragment() {
 
+    // تعریف بایندینگ برای فرگمنت
+    // Binding für das Fragment definieren
     lateinit var binding: FragmentSplashBinding
 
+    // ایجاد ویو فرگمنت
+    // Die View des Fragments erstellen
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,15 +28,18 @@ class Splash : Fragment() {
         return binding.root
     }
 
+    // تنظیمات ویو پس از ایجاد
+    // Einstellungen der View nach der Erstellung
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // انتقال به فرگمنت خوش‌آمدگویی پس از تاخیر
+        // Navigation zum Willkommens-Fragment nach einer Verzögerung
         Handler(Looper.getMainLooper()).postDelayed({
             findNavController().navigate(R.id.action_splash_to_welcome)
-        }, 3000) // 4 seconds delay
+        }, 3000) // 3 seconds delay
     }
 }
-
 
 
 

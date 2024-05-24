@@ -1,6 +1,6 @@
 package com.example.mehrdad_food_hub.Model
 
-class Subcategory (
+class Subcategory(
 
     val name: String,
     val productDescription: String,

@@ -18,12 +18,16 @@ import com.example.mehrdad_food_hub.databinding.FragmentHomeScreenBinding
 
 
 class HomeScreen : Fragment() {
-
+    // تعریف بایندینگ برای فرگمنت
+    // Binding für das Fragment definieren
     lateinit var binding: FragmentHomeScreenBinding
+
     // تعریف ViewModel مشترک بین فرگمنت‌ها
+    // Gemeinsames ViewModel zwischen den Fragmenten definieren
     private val viewModel: SharedViewModel by activityViewModels()
 
-
+    // ایجاد ویو فرگمنت
+    // Die View des Fragments erstellen
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,21 +36,29 @@ class HomeScreen : Fragment() {
         return binding.root
     }
 
+    // تنظیمات ویو پس از ایجاد
+    // Einstellungen der View nach der Erstellung
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // تنظیم کلیک برای دکمه افزودن محصول
+        // Klick-Listener für den Produkt-Hinzufügen-Button einstellen
         binding.floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeScreen_to_addProductToList)
         }
 
+        // تعریف تابع برای کلیک روی دسته‌بندی
+        // Funktion für Klick auf die Kategorie definieren
         val onCategoryClick: (List<Subcategory>, String) -> Unit = { subcategories, categoryName ->
             viewModel.setSubcategories(subcategories)
             val action = HomeScreenDirections.actionHomeScreenToHomeSubcategory(categoryName)
             Handler(Looper.getMainLooper()).postDelayed({
                 findNavController().navigate(action)
-            }, 200) // 4 seconds delay
+            }, 200) // 200 milliseconds delay
         }
 
+        // مشاهده تغییرات در دسته‌بندی‌ها
+        // Beobachten von Änderungen in den Kategorien
         viewModel.categories.observe(viewLifecycleOwner) { categories ->
             val sortedCategories = categories.sortedBy { it.name }
             val adapter = CategoryAadapter(sortedCategories) { subcategories, categoryName ->
@@ -55,10 +67,11 @@ class HomeScreen : Fragment() {
             binding.RecyclerViewCategory.adapter = adapter
         }
 
+        // تنظیم آداپتور برای RecyclerView
+        // Adapter für RecyclerView einstellen
         val adapter = CategoryAadapter(Datasource().categories()) { subcategories, categoryName ->
             onCategoryClick(subcategories, categoryName)
         }
         binding.RecyclerViewCategory.adapter = adapter
     }
 }
-

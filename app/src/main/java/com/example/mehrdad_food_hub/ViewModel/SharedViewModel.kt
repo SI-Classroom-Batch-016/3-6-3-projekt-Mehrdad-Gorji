@@ -9,118 +9,226 @@ import com.example.mehrdad_food_hub.Model.Subcategory
 import com.example.mehrdad_food_hub.Model.Warenkorb
 import com.example.mehrdad_food_hub.R
 
-class SharedViewModel: ViewModel() {
-    // ****************************************************************************
+class SharedViewModel : ViewModel() {
+    // *********************************** زیرمجموعه‌ها // Unterkategorien ************************
 
-    // زیرمجموعه‌ها
-    private val _subcategories = MutableLiveData<List<Subcategory>>()  // تعریف یک MutableLiveData برای لیستی از زیرمجموعه‌ها
-    val subcategories: LiveData<List<Subcategory>> get() = _subcategories  // تعریف یک LiveData عمومی برای دسترسی فقط خواندنی به زیرمجموعه‌ها
 
-    private val _selectedSubcategory = MutableLiveData<Subcategory>()  // تعریف یک MutableLiveData برای زیرمجموعه انتخاب شده
-    val selectedSubcategory: LiveData<Subcategory> get() = _selectedSubcategory  // تعریف یک LiveData عمومی برای دسترسی فقط خواندنی به زیرمجموعه انتخاب شده
+    // تعریف یک MutableLiveData برای لیستی از زیرمجموعه‌ها
+    // Definition einer MutableLiveData für eine Liste von Unterkategorien
+    private val _subcategories = MutableLiveData<List<Subcategory>>()
 
-    private val _currentSubcategoryIndex = MutableLiveData<Int>()  // تعریف یک MutableLiveData برای نگه داشتن شاخص زیرمجموعه فعلی
+    // تعریف یک LiveData عمومی برای دسترسی فقط خواندنی به زیرمجموعه‌ها
+    // Definition einer öffentlichen LiveData für schreibgeschützten Zugriff auf die Unterkategorien
+    val subcategories: LiveData<List<Subcategory>> get() = _subcategories
 
-    // سبد خرید
-    private val _cart = MutableLiveData<List<Warenkorb>>()  // تعریف یک MutableLiveData برای لیستی از سبد خرید
-    val cart: LiveData<List<Warenkorb>> get() = _cart  // تعریف یک LiveData عمومی برای دسترسی فقط خواندنی به سبد خرید
+    // تعریف یک MutableLiveData برای زیرمجموعه انتخاب شده
+    // Definition einer MutableLiveData für die ausgewählte Unterkategorie
+    private val _selectedSubcategory = MutableLiveData<Subcategory>()
 
-    private val cartItems: MutableList<Warenkorb> = mutableListOf()  // تعریف یک لیست Mutable برای نگه داشتن اقلام سبد خرید
+    // تعریف یک LiveData عمومی برای دسترسی فقط خواندنی به زیرمجموعه انتخاب شده
+    // Definition einer öffentlichen LiveData für schreibgeschützten Zugriff auf die ausgewählte Unterkategorie
+    val selectedSubcategory: LiveData<Subcategory> get() = _selectedSubcategory
 
-    private val _itemCount = MutableLiveData<Int>()  // تعریف یک MutableLiveData برای نگه داشتن تعداد اقلام
-    val itemCount: LiveData<Int> get() = _itemCount  // تعریف یک LiveData عمومی برای دسترسی فقط خواندنی به تعداد اقلام
+    // تعریف یک MutableLiveData برای نگه داشتن شاخص زیرمجموعه فعلی
+    // Definition einer MutableLiveData zur Speicherung des aktuellen Unterkategorie-Index
+    private val _currentSubcategoryIndex = MutableLiveData<Int>()
 
-    // دسته‌بندی‌ها
-    private val _categories = MutableLiveData<List<Category>>()  // تعریف یک MutableLiveData برای لیستی از دسته‌بندی‌ها
-    val categories: LiveData<List<Category>> get() = _categories  // تعریف یک LiveData عمومی برای دسترسی فقط خواندنی به دسته‌بندی‌ها
+    // *********************************** سبد خرید // Einkaufswagen ************************
+    // تعریف یک MutableLiveData برای لیستی از سبد خرید
+    // Definition einer MutableLiveData für eine Liste von Warenkörben
+    private val _cart = MutableLiveData<List<Warenkorb>>()
 
-    // مقداردهی اولیه
+    // تعریف یک LiveData عمومی برای دسترسی فقط خواندنی به سبد خرید
+    // Definition einer öffentlichen LiveData für schreibgeschützten Zugriff auf den Einkaufswagen
+    val cart: LiveData<List<Warenkorb>> get() = _cart
+
+    // تعریف یک لیست Mutable برای نگه داشتن اقلام سبد خرید
+    // Definition einer veränderbaren Liste zur Speicherung der Warenkorbartikel
+    private val cartItems: MutableList<Warenkorb> = mutableListOf()
+
+    // تعریف یک MutableLiveData برای نگه داشتن تعداد اقلام
+    // Definition einer MutableLiveData zur Speicherung der Artikelanzahl
+    private val _itemCount = MutableLiveData<Int>()
+
+    // تعریف یک LiveData عمومی برای دسترسی فقط خواندنی به تعداد اقلام
+    // Definition einer öffentlichen LiveData für schreibgeschützten Zugriff auf die Artikelanzahl
+    val itemCount: LiveData<Int> get() = _itemCount
+
+
+    // *********************************** دسته‌بندی‌ها // Kategorien ************************
+    // تعریف یک MutableLiveData برای لیستی از دسته‌بندی‌ها
+    // Definition einer MutableLiveData für eine Liste von Kategorien
+    private val _categories = MutableLiveData<List<Category>>()
+
+    // تعریف یک LiveData عمومی برای دسترسی فقط خواندنی به دسته‌بندی‌ها
+    // Definition einer öffentlichen LiveData für schreibgeschützten Zugriff auf die Kategorien
+    val categories: LiveData<List<Category>> get() = _categories
+
+    // *********************************** مقداردهی اولیه // Initialisierung ************************
     init {
-        _itemCount.value = cartItems.sumOf { it.productQuantity }  // مقداردهی اولیه تعداد اقلام بر اساس جمع مقادیر اقلام سبد خرید
-        _currentSubcategoryIndex.value = 0  // مقداردهی اولیه شاخص زیرمجموعه فعلی به 0
-        _categories.value = Datasource().categories().sortedBy { it.name }  // مقداردهی اولیه دسته‌بندی‌ها و مرتب‌سازی آن‌ها بر اساس نام
+        // مقداردهی اولیه تعداد اقلام بر اساس جمع مقادیر اقلام سبد خرید
+        // Initialisierung der Artikelanzahl basierend auf der Summe der Artikelmengen im Warenkorb
+        _itemCount.value = cartItems.sumOf { it.productQuantity }
+        // مقداردهی اولیه شاخص زیرمجموعه فعلی به 0
+        // Initialisierung des aktuellen Unterkategorie-Index auf 0
+        _currentSubcategoryIndex.value = 0
+        // مقداردهی اولیه دسته‌بندی‌ها و مرتب‌سازی آن‌ها بر اساس نام
+        // Initialisierung der Kategorien und Sortierung nach Namen
+        _categories.value = Datasource().categories().sortedBy { it.name }
     }
 
-    // توابع زیرمجموعه‌ها
+    // *********************************** توابع زیرمجموعه‌ها // Unterkategorien-Funktionen ************************
     fun setSubcategories(subcategories: List<Subcategory>) {
-        _subcategories.value = subcategories.sortedBy { it.name }  // تنظیم و مرتب‌سازی زیرمجموعه‌ها بر اساس نام
-        _currentSubcategoryIndex.value = 0  // بازنشانی شاخص زیرمجموعه فعلی به 0
+        // تنظیم و مرتب‌سازی زیرمجموعه‌ها بر اساس نام
+        // Setzen und Sortieren der Unterkategorien nach Namen
+        _subcategories.value = subcategories.sortedBy { it.name }
+        // بازنشانی شاخص زیرمجموعه فعلی به 0
+        // Zurücksetzen des aktuellen Unterkategorie-Index auf 0
+        _currentSubcategoryIndex.value = 0
     }
 
     fun setSelectedSubcategory(subcategory: Subcategory) {
-        _selectedSubcategory.value = subcategory  // تنظیم زیرمجموعه انتخاب شده
+        // تنظیم زیرمجموعه انتخاب شده
+        // Setzen der ausgewählten Unterkategorie
+        _selectedSubcategory.value = subcategory
     }
 
     fun showNextSubcategory() {
-        val currentIndex = _currentSubcategoryIndex.value ?: 0  // گرفتن شاخص فعلی یا مقدار پیش‌فرض 0
+        // گرفتن شاخص فعلی یا مقدار پیش‌فرض 0
+        // Abrufen des aktuellen Index oder Standardwert 0
+        val currentIndex = _currentSubcategoryIndex.value ?: 0
         val subcategories = _subcategories.value
-        if (!subcategories.isNullOrEmpty()) {  // بررسی اینکه زیرمجموعه‌ها تهی نیستند
-            val nextIndex = (currentIndex + 1) % subcategories.size  // محاسبه شاخص بعدی با توجه به اندازه زیرمجموعه‌ها
-            _currentSubcategoryIndex.value = nextIndex  // تنظیم شاخص بعدی
-            _selectedSubcategory.value = subcategories[nextIndex]  // تنظیم زیرمجموعه انتخاب شده بعدی
+        // بررسی اینکه زیرمجموعه‌ها تهی نیستند
+        // Überprüfen, ob die Unterkategorien nicht leer sind
+        if (!subcategories.isNullOrEmpty()) {
+            // محاسبه شاخص بعدی با توجه به اندازه زیرمجموعه‌ها
+            // Berechnung des nächsten Index basierend auf der Größe der Unterkategorien
+            val nextIndex = (currentIndex + 1) % subcategories.size
+            // تنظیم شاخص بعدی
+            // Setzen des nächsten Index
+            _currentSubcategoryIndex.value = nextIndex
+            // تنظیم زیرمجموعه انتخاب شده بعدی
+            // Setzen der nächsten ausgewählten Unterkategorie
+            _selectedSubcategory.value = subcategories[nextIndex]
         }
     }
 
     fun showBackSubcategory() {
-        val currentIndex = _currentSubcategoryIndex.value ?: 0  // گرفتن شاخص فعلی یا مقدار پیش‌فرض 0
+        // گرفتن شاخص فعلی یا مقدار پیش‌فرض 0
+        // Abrufen des aktuellen Index oder Standardwert 0
+        val currentIndex = _currentSubcategoryIndex.value ?: 0
         val subcategories = _subcategories.value
-        if (!subcategories.isNullOrEmpty()) {  // بررسی اینکه زیرمجموعه‌ها تهی نیستند
-            val backIndex = if (currentIndex - 1 < 0) subcategories.size - 1 else (currentIndex - 1)  // محاسبه شاخص قبلی یا تنظیم به آخرین شاخص در صورت منفی بودن
-            _currentSubcategoryIndex.value = backIndex  // تنظیم شاخص قبلی
-            _selectedSubcategory.value = subcategories[backIndex]  // تنظیم زیرمجموعه انتخاب شده قبلی
+        // بررسی اینکه زیرمجموعه‌ها تهی نیستند
+        // Überprüfen, ob die Unterkategorien nicht leer sind
+        if (!subcategories.isNullOrEmpty()) {
+            // محاسبه شاخص قبلی یا تنظیم به آخرین شاخص در صورت منفی بودن
+            // Berechnung des vorherigen Index oder Setzen auf den letzten Index bei negativem Wert
+            val backIndex = if (currentIndex - 1 < 0) subcategories.size - 1 else (currentIndex - 1)
+            // تنظیم شاخص قبلی
+            // Setzen des vorherigen Index
+            _currentSubcategoryIndex.value = backIndex
+            // تنظیم زیرمجموعه انتخاب شده قبلی
+            // Setzen der vorherigen ausgewählten Unterkategorie
+            _selectedSubcategory.value = subcategories[backIndex]
         }
     }
+    // *********************************** توابع سبد خرید // Einkaufswagen-Funktionen ************************
 
-    // توابع سبد خرید
     fun addToCart(warenkorb: Warenkorb) {
-        val existingItem = cartItems.find { it.productName == warenkorb.productName }  // جستجوی آیتم موجود با همان نام محصول
+        // جستجوی آیتم موجود با همان نام محصول
+        // Suche nach vorhandenem Artikel mit demselben Produktnamen
+        val existingItem = cartItems.find { it.productName == warenkorb.productName }
         if (existingItem != null) {
-            existingItem.productQuantity += 1  // افزایش تعداد محصول در صورت موجود بودن
+            // افزایش تعداد محصول در صورت موجود بودن
+            // Erhöhen der Produktmenge, falls vorhanden
+            existingItem.productQuantity += 1
         } else {
-            cartItems.add(warenkorb)  // افزودن آیتم جدید به سبد خرید در صورت عدم وجود
+            // افزودن آیتم جدید به سبد خرید در صورت عدم وجود
+            // Hinzufügen eines neuen Artikels zum Warenkorb, falls nicht vorhanden
+            cartItems.add(warenkorb)
         }
-        _cart.value = cartItems  // به‌روزرسانی سبد خرید
-        _itemCount.value = cartItems.sumOf { it.productQuantity }  // به‌روزرسانی تعداد اقلام
+        // به‌روزرسانی سبد خرید
+        // Aktualisieren des Warenkorbs
+        _cart.value = cartItems
+        // به‌روزرسانی تعداد اقلام
+        // Aktualisieren der Artikelanzahl
+        _itemCount.value = cartItems.sumOf { it.productQuantity }
     }
 
     fun updateQuantity(warenkorb: Warenkorb, quantity: Int) {
-        val cartItem = cartItems.find { it.productName == warenkorb.productName }  // جستجوی آیتم موجود با همان نام محصول
+        // جستجوی آیتم موجود با همان نام محصول
+        // Suche nach vorhandenem Artikel mit demselben Produktnamen
+        val cartItem = cartItems.find { it.productName == warenkorb.productName }
         if (cartItem != null) {
             if (quantity > 0) {
-                cartItem.productQuantity = quantity  // به‌روزرسانی تعداد محصول
+                // به‌روزرسانی تعداد محصول
+                // Aktualisieren der Produktmenge
+                cartItem.productQuantity = quantity
             } else {
-                cartItems.remove(cartItem)  // حذف آیتم از سبد خرید در صورت صفر بودن تعداد
+                // حذف آیتم از سبد خرید در صورت صفر بودن تعداد
+                // Entfernen des Artikels aus dem Warenkorb bei Menge null
+                cartItems.remove(cartItem)
             }
-            _cart.value = cartItems  // به‌روزرسانی سبد خرید
-            _itemCount.value = cartItems.sumOf { it.productQuantity }  // به‌روزرسانی تعداد اقلام
+            // به‌روزرسانی سبد خرید
+            // Aktualisieren des Warenkorbs
+            _cart.value = cartItems
+            // به‌روزرسانی تعداد اقلام
+            // Aktualisieren der Artikelanzahl
+            _itemCount.value = cartItems.sumOf { it.productQuantity }
         }
     }
 
     fun removeItemFromCart(item: Warenkorb) {
-        cartItems.remove(item)  // حذف آیتم از سبد خرید
-        _cart.value = cartItems  // به‌روزرسانی سبد خرید
-        _itemCount.value = cartItems.sumOf { it.productQuantity }  // به‌روزرسانی تعداد اقلام
+// حذف آیتم از سبد خرید
+        // Entfernen des Artikels aus dem Warenkorb
+        cartItems.remove(item)
+        // به‌روزرسانی سبد خرید
+        // Aktualisieren des Warenkorbs
+        _cart.value = cartItems
+        // به‌روزرسانی تعداد اقلام
+        // Aktualisieren der Artikelanzahl
+        _itemCount.value = cartItems.sumOf { it.productQuantity }
     }
 
-    // توابع دسته‌بندی‌ها
+    // توابع دسته‌بندی‌ها // Kategorien-Funktionen
     fun addProductToCategory(categoryName: String, subcategory: Subcategory) {
-        val currentCategories = _categories.value?.toMutableList() ?: mutableListOf()  // گرفتن لیست فعلی دسته‌بندی‌ها یا ایجاد لیست جدید در صورت تهی بودن
-        val category = currentCategories.find { it.name == categoryName }  // جستجوی دسته‌بندی با نام مشخص شده
+        // گرفتن لیست فعلی دسته‌بندی‌ها یا ایجاد لیست جدید در صورت تهی بودن
+        // Abrufen der aktuellen Kategorienliste oder Erstellen einer neuen Liste, falls leer
+        val currentCategories = _categories.value?.toMutableList() ?: mutableListOf()
+        // جستجوی دسته‌بندی با نام مشخص شده
+        // Suche nach Kategorie mit angegebenem Namen
+        val category = currentCategories.find { it.name == categoryName }
         if (category != null) {
-            val updatedSubcategories = category.subcategories.toMutableList()  // گرفتن لیست زیرمجموعه‌های فعلی
-            updatedSubcategories.add(subcategory)  // افزودن زیرمجموعه جدید
-            val updatedCategory = category.copy(subcategories = updatedSubcategories.sortedBy { it.name })  // به‌روزرسانی و مرتب‌سازی زیرمجموعه‌ها بر اساس نام
-            val index = currentCategories.indexOf(category)  // گرفتن شاخص دسته‌بندی فعلی
-            currentCategories[index] = updatedCategory  // به‌روزرسانی دسته‌بندی در لیست
+            // گرفتن لیست زیرمجموعه‌های فعلی
+            // Abrufen der aktuellen Unterkategorienliste
+            val updatedSubcategories = category.subcategories.toMutableList()
+            // افزودن زیرمجموعه جدید
+            // Hinzufügen neuer Unterkategorie
+            updatedSubcategories.add(subcategory)
+            // به‌روزرسانی و مرتب‌سازی زیرمجموعه‌ها بر اساس نام
+            // Aktualisieren und Sortieren der Unterkategorien nach Namen
+            val updatedCategory =
+                category.copy(subcategories = updatedSubcategories.sortedBy { it.name })
+            // گرفتن شاخص دسته‌بندی فعلی
+            // Abrufen des aktuellen Kategorienindex
+            val index = currentCategories.indexOf(category)
+            // به‌روزرسانی دسته‌بندی در لیست
+            // Aktualisieren der Kategorie in der Liste
+            currentCategories[index] = updatedCategory
         } else {
             val newCategory = Category(
                 name = categoryName,
-                image = R.drawable.veggie_2,  // باید تصویر مناسب را اضافه کنید
-                subcategories = listOf(subcategory).sortedBy { it.name }  // مرتب‌سازی زیرمجموعه‌ها بر اساس نام
+                image = R.drawable.veggie_2,  // باید تصویر مناسب را اضافه کنید // Ein geeignetes Bild muss hinzugefügt werden
+                // مرتب‌سازی زیرمجموعه‌ها بر اساس نام
+                // Sortieren der Unterkategorien nach Namen
+                subcategories = listOf(subcategory).sortedBy { it.name }
             )
-            currentCategories.add(newCategory)  // افزودن دسته‌بندی جدید به لیست
+            // افزودن دسته‌بندی جدید به لیست
+            // Hinzufügen neuer Kategorie zur Liste
+            currentCategories.add(newCategory)
         }
-        _categories.value = currentCategories.sortedBy { it.name }  // مرتب‌سازی دسته‌بندی‌ها بر اساس نام
+        // مرتب‌سازی دسته‌بندی‌ها بر اساس نام
+        // Sortieren der Kategorien nach Namen
+        _categories.value = currentCategories.sortedBy { it.name }
     }
 }
-
